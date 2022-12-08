@@ -1,6 +1,7 @@
 class SegmentConfig {
   SegmentConfig({
     required this.writeKey,
+    this.apiHost='api.segment.io/v1',
     this.trackApplicationLifecycleEvents = false,
     this.amplitudeIntegrationEnabled = false,
     this.appsflyerIntegrationEnabled = false,
@@ -8,6 +9,7 @@ class SegmentConfig {
   });
 
   final String writeKey;
+  final String apiHost;
   final bool trackApplicationLifecycleEvents;
   final bool amplitudeIntegrationEnabled;
   final bool appsflyerIntegrationEnabled;
@@ -16,6 +18,7 @@ class SegmentConfig {
   Map<String, dynamic> toMap() {
     return {
       'writeKey': writeKey,
+      'apiHost': apiHost,
       'trackApplicationLifecycleEvents': trackApplicationLifecycleEvents,
       'amplitudeIntegrationEnabled': amplitudeIntegrationEnabled,
       'appsflyerIntegrationEnabled': appsflyerIntegrationEnabled,
