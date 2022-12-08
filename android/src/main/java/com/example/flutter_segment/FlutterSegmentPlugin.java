@@ -65,6 +65,8 @@ public class FlutterSegmentPlugin implements MethodCallHandler, FlutterPlugin {
   private void setupChannels(FlutterSegmentOptions options) {
     try {
       Analytics.Builder analyticsBuilder = new Analytics.Builder(applicationContext, options.getWriteKey());
+      analyticsBuilder.defaultApiHost(options.getApiHost());
+      Log.i("FlutterSegment", "ApiHost: "+options.getApiHost());
       if (options.getTrackApplicationLifecycleEvents()) {
         Log.i("FlutterSegment", "Lifecycle events enabled");
 
