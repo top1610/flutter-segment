@@ -357,14 +357,15 @@ static BOOL wasSetupFromFile = NO;
     if(!writeKey) {
         return nil;
     }
+    NSURL *apiHostUrl = nil;
+    if(apiHost) {
+       apiHostUrl = [NSURL URLWithString:apiHost];
+    }
 
-
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:writeKey];
+    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:writeKey defaultAPIHost:apiHostUrl];
     configuration.trackApplicationLifecycleEvents = trackApplicationLifecycleEvents;
 
-    if(apiHost) {
-       configuration.apiHost = apiHost;
-    }
+
 
     if (isAmplitudeIntegrationEnabled) {
       [configuration use:[SEGAmplitudeIntegrationFactory instance]];
@@ -379,11 +380,16 @@ static BOOL wasSetupFromFile = NO;
     BOOL trackApplicationLifecycleEvents = [[dict objectForKey: @"trackApplicationLifecycleEvents"] boolValue];
     BOOL isAmplitudeIntegrationEnabled = [[dict objectForKey: @"amplitudeIntegrationEnabled"] boolValue];
     BOOL isAppsflyerIntegrationEnabled = [[dict objectForKey: @"appsflyerIntegrationEnabled"] boolValue];
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:writeKey];
-    configuration.trackApplicationLifecycleEvents = trackApplicationLifecycleEvents;
+    NSURL *apiHostUrl = nil;
     if(apiHost) {
-           configuration.apiHost = apiHost;
+       apiHostUrl = [NSURL URLWithString:apiHost];
     }
+
+    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:writeKey defaultAPIHost:apiHostUrl];
+
+
+    configuration.trackApplicationLifecycleEvents = trackApplicationLifecycleEvents;
+
 
     if (isAmplitudeIntegrationEnabled) {
       [configuration use:[SEGAmplitudeIntegrationFactory instance]];
